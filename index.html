@@ -132,7 +132,21 @@
         const resultDiv = document.getElementById('result');
         
         // المفتاح الخاص بك
-        const API_KEY = "AIzaSyBn5dOMPWJBOVrIQKY0CMwg4lvz8aZs3Kc"; 
+        const API_KEY = curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent" \
+  -H 'Content-Type: application/json' \
+  -H 'X-goog-api-key: AIzaSyBn5dOMPWJBOVrIQKY0CMwg4lvz8aZs3Kc;
+  -X POST \
+  -d '{
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": "Explain how AI works in a few words"
+          }
+        ]
+      }
+    ]
+  }'; 
 
         if(!desc) {
             alert("يرجى كتابة وصف بسيط أولاً");
