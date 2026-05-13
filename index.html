@@ -1,13 +1,151 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز التدريب الإعلامي | Media Training Hub</title>
+    <style>
+        /* التنسيق السينمائي والزجاجي */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* خلفية تعبيرية تعكس أجواء التصوير والإعلام */
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+                        url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 { 
+            font-weight: 300; 
+            margin-bottom: 30px; 
+            letter-spacing: 1px;
+            color: #ffd700; /* لون ذهبي خفيف للعنوان */
+        }
+
+        .input-group { 
+            margin-bottom: 25px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            text-align: right;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            margin-right: 5px;
+        }
+
+        /* تنسيق المدخلات الزجاجية */
+        .custom-dropdown, .custom-input {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            padding: 15px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .custom-input:focus, .custom-dropdown:focus {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        option { 
+            background: #1a1a2e; 
+            color: white; 
+        }
+
+        .btn-generate {
+            background: #ffd700;
+            color: #000;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn-generate:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+<div class="glass-panel">
+    <h1>Visual Caption Architect</h1>
+    
+    <!-- خانة وصف الحدث -->
+    <div class="input-group">
+        <label>ماذا يحدث في الصورة؟</label>
+        <textarea class="custom-input" rows="3" id="eventDesc" placeholder="مثال: لقطات عفوية للمتدربين أثناء تطبيق مهارات الإلقاء أمام الكاميرا..."></textarea>
+    </div>
+
+    <!-- خانة مرحلة الدورة التي أضفناها -->
+    <div class="input-group">
+        <label>توقيت النشر (المرحلة):</label>
+        <select id="eventPhase" class="custom-dropdown">
+            <option value="start">🚀 انطلاق: الترحيب والحماس للبداية</option>
+            <option value="mid">📸 كواليس: تفاعل وعمل مستمر بالدورة</option>
+            <option value="end">🎓 ختام: فخر بالإنجاز وتوزيع الشهادات</option>
+        </select>
+    </div>
+
+    <button class="btn-generate" onclick="generateCaption()">توليد كابشن تفاعلي</button>
+    
+    <div id="result" style="margin-top: 25px; font-size: 0.95rem; line-height: 1.6; color: #f1f5f9;"></div>
+</div>
+
+<script>
+    function generateCaption() {
+        const desc = document.getElementById('eventDesc').value;
+        const phase = document.getElementById('eventPhase').value;
+        const resultDiv = document.getElementById('result');
+        
+        if(!desc) {
+            alert("يرجى كتابة وصف بسيط أولاً");
+            return;
+        }
+
+        resultDiv.innerHTML = "جاري تصميم التوصيف الاحترافي... ✨";
+        
+        // هنا سيتم الربط لاحقاً بـ API الذكاء الاصطناعي
+        setTimeout(() => {
+            resultDiv.innerHTML = "هذا القسم سيظهر فيه النص التفاعلي الرسمي بعد ربط مفتاح الـ API الخاص بشركتك الناشئة.";
+        }, 1000);
+    }
+</script>
+
+</body>
   </body>
 </html>
 
