@@ -127,54 +127,40 @@
 
 <script>
     async function generateCaption() {
-        const desc = document.getElementById('eventDesc').value;
-        const phase = document.getElementById('eventPhase').value;
-        const resultDiv = document.getElementById('result');
-        
-        // المفتاح الخاص بك
-        const API_KEY = curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent" \
-  -H 'Content-Type: application/json' \
-  -H 'X-google-api-key: "AIzaSyBn5dOMPWJBOVrIQKY0CMwg4lvz8aZs3Kc";
-  -X POST \
-  -d '{
-    "contents": [
-      {
-        "parts": [
-          {
-            "text": "Explain how AI works in a few words"
-          }
-        ]
-      }
-    ]
-  }'; 
+    const desc = document.getElementById('eventDesc').value;
+    const phase = document.getElementById('eventPhase').value;
+    const resultDiv = document.getElementById('result');
+    
+    // المفتاح الخاص بك كمتغير نصي بسيط
+    const API_KEY = "AIzaSyBn5dOMPWJBOVrIQKY0CMwg4lvz8aZs3Kc"; 
 
-        if(!desc) {
-            alert("يرجى كتابة وصف بسيط أولاً");
-            return;
-        }
-
-        resultDiv.innerHTML = "جاري تصميم التوصيف الاحترافي عبر الذكاء الاصطناعي... ✨";
-
-        try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: `أنت خبير محتوى إعلامي. اكتب كابشن تفاعلي ورسمي لمركز تدريب إعلامي بناءً على هذا الوصف: "${desc}" وباعتبار أننا في مرحلة: "${phase}". أضف هاشتاقات مناسبة وسؤال تفاعلي للجمهور.` }]
-                    }]
-                })
-            });
-
-            const data = await response.json();
-            const aiText = data.candidates[0].content.parts[0].text;
-            resultDiv.innerHTML = `<div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: right;">${aiText}</div>`;
-
-        } catch (error) {
-            resultDiv.innerHTML = "عذراً، حدث خطأ أثناء الاتصال بالذكاء الاصطناعي. تأكد من صلاحية المفتاح.";
-            console.error(error);
-        }
+    if(!desc) {
+        alert("يرجى كتابة وصف بسيط أولاً");
+        return;
     }
+
+    resultDiv.innerHTML = "✨ جاري تصميم التوصيف الاحترافي عبر الذكاء الاصطناعي...";
+
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: `اكتب كابشن انستجرام تفاعلي ورسمي لمركز تدريب إعلامي. الوصف: ${desc}. المرحلة: ${phase}. أضف هاشتاقات وسؤال للجمهور.` }]
+                }]
+            })
+        });
+
+        const data = await response.json();
+        const aiText = data.candidates[0].content.parts[0].text;
+        resultDiv.innerHTML = `<div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">${aiText}</div>`;
+
+    } catch (error) {
+        resultDiv.innerHTML = "❌ حدث خطأ. تأكد من إعدادات المفتاح أو الاتصال.";
+        console.error(error);
+    }
+}
 </script>
 
 </body>
